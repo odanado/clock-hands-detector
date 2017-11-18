@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 
 class App extends Component {
@@ -63,12 +65,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div style={{ margin: "15px auto", top: "100px" }}>
+        <AppBar title="clock hands detector"/>
+        <div style={{ margin: "10px auto", top: "100px" }}>
           <canvas id="square" ref="square" style={{ position: "absolute", width: "480px", height: "480px" }}></canvas>
           <video id="localVideo" ref="localVideo" autoPlay style={{ width: "480px", height: "480px", solid: "black" }}></video>
         </div>
 
-        <button onClick={this.startVideo}>Start</button>
+        <RaisedButton label="Start" onClick={this.startVideo}/>
         <button onClick={this.cutImage}>Cut</button>
         <canvas ref="canvas" style={{ width: "120px", height: "120px" }}></canvas>
       </div>
