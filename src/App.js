@@ -16,7 +16,7 @@ class App extends Component {
 
   calcSquare(parentWidth, parentHeight, size) {
     let width = size;
-    let height = size * parentHeight / parentWidth;
+    let height = size;
     let x = (parentWidth - width) / 2;
     let y = (parentHeight - height) / 2;
 
@@ -67,8 +67,8 @@ class App extends Component {
       <div className="App">
         <AppBar title="clock hands detector"/>
         <div style={{ margin: "10px auto", top: "100px" }}>
-          <canvas id="square" ref="square" style={{ position: "absolute", width: "480px", height: "480px" }}></canvas>
-          <video id="localVideo" ref="localVideo" autoPlay style={{ width: "480px", height: "480px", solid: "black" }}></video>
+          <canvas id="square" ref="square" style={{ position: "absolute", width: "50%" }}></canvas>
+          <video id="localVideo" ref="localVideo" autoPlay style={{ width: "50%", solid: "black" }}></video>
         </div>
 
         <RaisedButton label="Start" onClick={this.startVideo}/>
