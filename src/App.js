@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   startVideo() {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    navigator.mediaDevices.getUserMedia({ video: {facingMode: "environment"}, audio: false })
       .then((stream) => {
         this.refs.localVideo.src = window.URL.createObjectURL(stream);
         setTimeout(() => this.drawSquare(5), 1000);
