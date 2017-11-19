@@ -45,7 +45,7 @@ class App extends Component {
         if (window.stream) {
             window.stream.getTracks().forEach(track =>  track.stop());
         }
-        
+
         let videoSource = this.refs.cameraSelectField.state.currentId;
         let constraints = {
             audio: false,
@@ -53,6 +53,7 @@ class App extends Component {
         };
         navigator.mediaDevices.getUserMedia(constraints)
             .then((stream) => {
+                window.stream = stream;
                 this.refs.localVideo.src = window.URL.createObjectURL(stream);
                 setTimeout(() => this.drawSquare(5), 1000);
             }).catch(function (error) {
@@ -77,13 +78,12 @@ class App extends Component {
         return (
             <div className="App">
                 <AppBar title="clock hands detector" />
+                <CameraSelectField ref="cameraSelectField" id="cameraSelectField" handleChange={this.startVideo} />
                 <div style={{ margin: "10px auto", top: "100px" }}>
                     <canvas id="square" ref="square" style={{ position: "absolute", width: "50%" }}></canvas>
                     <video id="localVideo" ref="localVideo" autoPlay style={{ width: "50%", solid: "black" }}></video>
                 </div>
-                <CameraSelectField ref="cameraSelectField" id="cameraSelectField" handleChange={this.startVideo} />
-                <RaisedButton label="Start" onClick={this.startVideo} />
-                <button onClick={this.cutImage}>Cut</button>
+                <RaisedButton label="Cut" onClick={this.cutImage} />
                 <canvas ref="canvas" style={{ width: "120px", height: "120px" }}></canvas>
             </div>
         );

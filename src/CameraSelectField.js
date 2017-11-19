@@ -5,7 +5,9 @@ import MenuItem from 'material-ui/MenuItem';
 class CameraSelectField extends Component {
     state = {
         deviceIds: [],
-        currentId: null
+        deviceLabels: [],
+        currentId: null,
+        currentLabel: null
     }
     constructor(props) {
         super(props)
@@ -21,17 +23,21 @@ class CameraSelectField extends Component {
                 if (device.kind === 'videoinput') {
                     this.setState(prevState => ({
                         deviceIds: [...prevState.deviceIds, device.deviceId],
-                        currentId: prevState.currentId
+                        deviceLabels: [...prevState.deviceLabels, device.label],
+                        currentId: prevState.currentId,
+                        currentLabel: prevState.currentLabel
                     }));
                 }
             }
         });
     }
-    handleChange(event, index, value) {
+    handleChange(event, idx, value) {
         this.setState(prevState => (
             {
                 deviceIds: prevState.deviceIds,
-                currentId: value
+                deviceLabels: prevState.deviceLabels,
+                currentId: this.state.deviceIds[idx],
+                currentLabel: this.state.deviceLabels[idx]
             }
         ));
         this.props.handleChange();
@@ -46,7 +52,7 @@ class CameraSelectField extends Component {
                 value={this.state.currentId}
                 onChange={this.handleChange}>
             {
-                this.state.deviceIds.map((id, i) => <MenuItem value={id} key={id} primaryText={`Camera ${i}`} />)
+                this.state.deviceIds.map((id, i) => <MenuItem value={id} key={id} primaryText={this.state.deviceLabels[i]} />)
             }
             </SelectField>
         );
